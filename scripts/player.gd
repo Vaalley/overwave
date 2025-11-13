@@ -3,6 +3,8 @@ class_name Player extends CharacterBody2D
 
 const SPEED = 100.0
 
+func _ready() -> void:
+	add_to_group("Player")
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction for all four directions (left, right, up, down)
