@@ -1,11 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8canohv7airc"]
+[gd_scene load_steps=4 format=3 uid="uid://c8canohv7airc"]
 
 [ext_resource type="Script" uid="uid://blj17kkldp1n2" path="res://scripts/upgrade_screen.gd" id="1_adbc8"]
+[ext_resource type="Resource" uid="uid://dfdvsn5fh8agb" path="res://upgrades/firerate_1.tres" id="2_ovwte"]
+[ext_resource type="Resource" uid="uid://cegmvasfijsbl" path="res://upgrades/speed_1.tres" id="3_sbak5"]
 
 [node name="UpgradeScreen" type="CanvasLayer"]
 process_mode = 3
 visible = false
 script = ExtResource("1_adbc8")
+all_upgrades = [ExtResource("2_ovwte"), ExtResource("3_sbak5")]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15

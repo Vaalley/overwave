@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=2 format=3 uid="uid://dfdvsn5fh8agb"]
+
+[ext_resource type="Script" uid="uid://co5ptavqlsk7p" path="res://scripts/upgrade_data.gd" id="1_0q3jy"]
+
+[resource]
+script = ExtResource("1_0q3jy")
+name = "Rapid Fire"
+description = "Fire 10% faster."
+type = 1
+value = 0.9
+metadata/_custom_type_script = "uid://co5ptavqlsk7p"
