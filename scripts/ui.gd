@@ -15,6 +15,5 @@ func _on_xp_changed(current_xp, xp_to_next_level):
 	xp_bar.value = current_xp
 	xp_bar.max_value = xp_to_next_level
 
-func _on_level_up(new_level):
-	print("LEVEL UP! New level: ", new_level)
-	# (Later, this is where we'll pause the game)
+func _on_level_up(_new_level):
+	pass
