@@ -1,6 +1,6 @@
 extends Node
 
-# Signals are how we'll tell the UI to update
+# Signals to update UI
 signal xp_changed(current_xp, xp_to_next_level)
 signal level_up(new_level)
 
