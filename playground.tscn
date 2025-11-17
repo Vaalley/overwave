@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://co7tvfjomwkg3"]
+[gd_scene load_steps=5 format=3 uid="uid://co7tvfjomwkg3"]
 
 [ext_resource type="Script" uid="uid://dx5sjy3b0nhdd" path="res://scripts/playground.gd" id="1_is3ju"]
 [ext_resource type="PackedScene" uid="uid://dlx8gy2mqhakx" path="res://player.tscn" id="1_rupst"]
 [ext_resource type="PackedScene" uid="uid://curpiiatp2p0m" path="res://desert_level.tscn" id="1_wt17y"]
+[ext_resource type="PackedScene" uid="uid://bia64nqwaymcs" path="res://ui.tscn" id="4_is3ju"]
 
 [node name="Playground" type="Node2D"]
 script = ExtResource("1_is3ju")
@@ -14,5 +15,7 @@ script = ExtResource("1_is3ju")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
+
+[node name="UI" parent="." instance=ExtResource("4_is3ju")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
