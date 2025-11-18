@@ -13,9 +13,8 @@ func init(data: WeaponData, player_node: Node2D):
 	timer.start()
 
 func _on_timer_timeout():
-	# Instantiate the bullet from our data
 	var p = weapon_data.projectile_scene.instantiate()
 	p.global_position = player.global_position
-	p.velocity = Vector2.RIGHT # (Still firing right for now)
+	p.velocity = Vector2.RIGHT
 	
 	get_tree().root.add_child(p)

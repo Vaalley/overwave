@@ -25,17 +25,13 @@ func add_weapon(weapon_data: WeaponData):
 	new_slot.init(weapon_data, self)
 
 func apply_upgrade(upgrade: UpgradeData):
-	# We check the "type" we defined in our resource
 	match upgrade.type:
 		UpgradeData.UpgradeType.PLAYER_SPEED:
 			SPEED += upgrade.value
 			print("Speed is now: ", SPEED)
 			
 		UpgradeData.UpgradeType.ATTACK_SPEED:
-			# --- MODIFY THIS ---
-			# Instead of one timer, we tell ALL our weapons to fire faster!
 			for weapon_slot in $WeaponManager.get_children():
 				weapon_slot.timer.wait_time *= upgrade.value
 			print("All weapon fire rates multiplied by: ", upgrade.value)
 			
-		# (We'll add a 'WEAPON_NEW' type later)
