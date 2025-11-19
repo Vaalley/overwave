@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://co7tvfjomwkg3"]
+[gd_scene load_steps=8 format=3 uid="uid://co7tvfjomwkg3"]
 
 [ext_resource type="Script" uid="uid://dx5sjy3b0nhdd" path="res://scripts/playground.gd" id="1_is3ju"]
 [ext_resource type="PackedScene" uid="uid://dlx8gy2mqhakx" path="res://player.tscn" id="1_rupst"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://d3nmxfdylldcq" path="res://weapons/wand.tres" id="4_4bqqs"]
 [ext_resource type="PackedScene" uid="uid://bia64nqwaymcs" path="res://ui.tscn" id="4_is3ju"]
 [ext_resource type="PackedScene" uid="uid://c8canohv7airc" path="res://upgrade_screen.tscn" id="5_o00ia"]
+[ext_resource type="Script" uid="uid://drhdcm60c55vj" path="res://scripts/game_manager.gd" id="7_ynsuh"]
 
 [node name="Playground" type="Node2D"]
 script = ExtResource("1_is3ju")
@@ -23,4 +24,10 @@ autostart = true
 
 [node name="UpgradeScreen" parent="." instance=ExtResource("5_o00ia")]
 
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("ground_layer")]
+script = ExtResource("7_ynsuh")
+ground_layer = NodePath("../DesertLevel/TileMapLayer")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="DesertLevel"]
