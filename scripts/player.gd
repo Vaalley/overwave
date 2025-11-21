@@ -3,6 +3,12 @@ class_name Player extends CharacterBody2D
 @export var starting_weapon: WeaponData
 var weapon_slot_scene = preload("res://weapon_slot.tscn")
 
+signal health_changed(current_value, max_value)
+signal player_died
+
+@export var max_health: float = 100.0
+var health: float = 100.0
+
 var SPEED = 100.0
 
 func _ready() -> void:
@@ -35,3 +41,16 @@ func apply_upgrade(upgrade: UpgradeData):
 				weapon_slot.timer.wait_time *= upgrade.value
 			print("All weapon fire rates multiplied by: ", upgrade.value)
 			
+func take_damage(amount: float):
+	health -= amount
+	print("Ouch! Health is: ", health)
+	
+	health_changed.emit(health, max_health)
+	
+	if health <= 0:
+		die()
+
+func die():
+	player_died.emit()
+	# For now, just restart the game instantly
+	get_tree().reload_current_scene()

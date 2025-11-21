@@ -27,3 +27,9 @@ func die():
 	get_tree().root.add_child(gem_instance)
 	
 	queue_free()
+
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		body.take_damage(10.0) # Deal 10 damage
+		queue_free()

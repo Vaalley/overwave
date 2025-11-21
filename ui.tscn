@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://b5ndqu810mgdo" path="res://scripts/ui.gd" id="1_fyqef"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xb563"]
-bg_color = Color(0.13262612, 0.6423871, 0.90527666, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m6e0p"]
+bg_color = Color(0.2220484, 0.58019, 0.7247739, 1)
 
-[sub_resource type="Theme" id="Theme_xb563"]
-ProgressBar/styles/background = SubResource("StyleBoxFlat_xb563")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fyqef"]
+bg_color = Color(0.88753235, 0.3119898, 0.26184756, 1)
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_fyqef")
@@ -17,9 +17,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
+offset_left = -150.0
+offset_top = -23.0
+offset_right = 150.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = SubResource("Theme_xb563")
+theme_override_styles/background = SubResource("StyleBoxFlat_m6e0p")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_right = 100.0
+offset_bottom = 30.0
+theme_override_styles/background = SubResource("StyleBoxFlat_fyqef")
