@@ -13,11 +13,33 @@ func init(data: WeaponData, player_node: Node2D):
 	timer.start()
 
 func _on_timer_timeout():
-	var p = weapon_data.projectile_scene.instantiate()
-	p.global_position = player.global_position
+	var target = _get_closest_enemy()
 	
-	var direction = (player.get_global_mouse_position() - player.global_position).normalized()
-	p.velocity = direction
-	p.rotation = direction.angle()
+	if target:
+		_fire_at(target)
+
+func _get_closest_enemy() -> Node2D:
+	var enemies = get_tree().get_nodes_in_group("Enemy")
+	if enemies.is_empty():
+		return null
+
+	var closest_enemy: Node2D = null
+	var closest_distance = INF
+
+	for enemy in enemies:
+		var dist = player.global_position.distance_squared_to(enemy.global_position)
+		if dist < closest_distance:
+			closest_distance = dist
+			closest_enemy = enemy
+
+	return closest_enemy
+
+func _fire_at(target: Node2D):
+	var projectile = weapon_data.projectile_scene.instantiate()
+	projectile.global_position = player.global_position
 	
-	get_tree().root.add_child(p)
+	var direction = (target.global_position - player.global_position).normalized()
+	projectile.velocity = direction
+	projectile.rotation = direction.angle()
+	
+	get_tree().current_scene.add_child(projectile)
