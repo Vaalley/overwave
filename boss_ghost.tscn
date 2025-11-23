@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfus4yfn4f3bo"]
+[gd_scene load_steps=5 format=3 uid="uid://conl4t5tk2k8u"]
 
-[ext_resource type="Script" uid="uid://puku48rvio5l" path="res://scripts/ghost.gd" id="1_6attn"]
-[ext_resource type="Texture2D" uid="uid://f2yuxwrr2un4" path="res://tilemap_packed.png" id="1_v5pp4"]
+[ext_resource type="Script" uid="uid://puku48rvio5l" path="res://scripts/ghost.gd" id="1_6wdc1"]
+[ext_resource type="Texture2D" uid="uid://f2yuxwrr2un4" path="res://tilemap_packed.png" id="2_xs86x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6attn"]
 radius = 7.0
@@ -10,11 +10,14 @@ radius = 7.0
 radius = 8.0
 
 [node name="Ghost" type="CharacterBody2D" groups=["Enemy"]]
-script = ExtResource("1_6attn")
-max_health = 2.0
+scale = Vector2(2, 2)
+script = ExtResource("1_6wdc1")
+speed = 30.0
+max_health = 30.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_v5pp4")
+modulate = Color(0.90305364, 0.29235047, 0.23546144, 1)
+texture = ExtResource("2_xs86x")
 hframes = 12
 vframes = 12
 frame = 121

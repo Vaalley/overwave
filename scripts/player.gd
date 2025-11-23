@@ -16,14 +16,8 @@ func _ready() -> void:
 	add_weapon(starting_weapon)
 	
 func _physics_process(_delta: float) -> void:
-	var direction := Input.get_vector("left", "right", "up", "down")
-
-	if direction:
-		velocity = direction * SPEED
-	else:
-		velocity = Vector2.ZERO
-
-	move_and_slide()
+	# TODO: add AI logic here
+	pass
 
 func add_weapon(weapon_data: WeaponData):
 	var new_slot = weapon_slot_scene.instantiate()

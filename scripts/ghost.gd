@@ -1,10 +1,16 @@
 extends CharacterBody2D
 
-const SPEED = 50.0
-var player = null
+@export var speed: float = 50.0
+@export var max_health: float = 10.0
 
+var health: float
+var player = null
 var xp_gem_scene = preload("res://xp_gem.tscn")
-var health = 1
+
+func _ready():
+	health = max_health
+	
+	add_to_group("Enemy")
 
 func _physics_process(_delta: float):
 	if not player:
@@ -13,13 +19,17 @@ func _physics_process(_delta: float):
 			return
 	
 	var direction = global_position.direction_to(player.global_position)
-	velocity = direction * SPEED
+	velocity = direction * speed
 	move_and_slide()
 
-func take_damage():
-	health -= 1
+func take_damage(amount):
+	health -= amount
+	var tween = create_tween()
+	tween.tween_property($Sprite2D, "scale", Vector2(1.2, 1.2), 0.1)
+	tween.tween_property($Sprite2D, "scale", Vector2(1.0, 1.0), 0.1)
+	
 	if health <= 0:
-		die()
+		call_deferred("die")
 
 func die():
 	var gem_instance = xp_gem_scene.instantiate()
@@ -31,5 +41,5 @@ func die():
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		body.take_damage(10.0) # Deal 10 damage
+		body.take_damage(10.0)
 		queue_free()

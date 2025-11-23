@@ -15,6 +15,9 @@ func init(data: WeaponData, player_node: Node2D):
 func _on_timer_timeout():
 	var p = weapon_data.projectile_scene.instantiate()
 	p.global_position = player.global_position
-	p.velocity = Vector2.RIGHT
+	
+	var direction = (player.get_global_mouse_position() - player.global_position).normalized()
+	p.velocity = direction
+	p.rotation = direction.angle()
 	
 	get_tree().root.add_child(p)

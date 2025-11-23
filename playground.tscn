@@ -1,33 +1,26 @@
 [gd_scene load_steps=8 format=3 uid="uid://co7tvfjomwkg3"]
 
-[ext_resource type="Script" uid="uid://dx5sjy3b0nhdd" path="res://scripts/playground.gd" id="1_is3ju"]
 [ext_resource type="PackedScene" uid="uid://dlx8gy2mqhakx" path="res://player.tscn" id="1_rupst"]
 [ext_resource type="PackedScene" uid="uid://curpiiatp2p0m" path="res://desert_level.tscn" id="1_wt17y"]
 [ext_resource type="Resource" uid="uid://d3nmxfdylldcq" path="res://weapons/wand.tres" id="4_4bqqs"]
 [ext_resource type="PackedScene" uid="uid://bia64nqwaymcs" path="res://ui.tscn" id="4_is3ju"]
 [ext_resource type="PackedScene" uid="uid://c8canohv7airc" path="res://upgrade_screen.tscn" id="5_o00ia"]
 [ext_resource type="Script" uid="uid://drhdcm60c55vj" path="res://scripts/game_manager.gd" id="7_ynsuh"]
+[ext_resource type="PackedScene" uid="uid://dfus4yfn4f3bo" path="res://ghost.tscn" id="8_v7dth"]
 
 [node name="Playground" type="Node2D"]
-script = ExtResource("1_is3ju")
 
 [node name="DesertLevel" parent="." instance=ExtResource("1_wt17y")]
 
 [node name="Player" parent="." instance=ExtResource("1_rupst")]
 starting_weapon = ExtResource("4_4bqqs")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
-autostart = true
-
 [node name="UI" parent="." instance=ExtResource("4_is3ju")]
 
 [node name="UpgradeScreen" parent="." instance=ExtResource("5_o00ia")]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("ground_layer")]
+[node name="GameManager" type="Node" parent="."]
 script = ExtResource("7_ynsuh")
-ground_layer = NodePath("../DesertLevel/TileMapLayer")
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+enemy_scene = ExtResource("8_v7dth")
 
 [editable path="DesertLevel"]
