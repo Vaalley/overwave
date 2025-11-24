@@ -8,16 +8,33 @@ signal player_died
 
 @export var max_health: float = 100.0
 var health: float = 100.0
+var ai_direction: Vector2 = Vector2.ZERO
+var ai_timer: float = 0.0
+@export var change_direction_interval: float = 2.0
 
 var SPEED = 100.0
 
 func _ready() -> void:
 	add_to_group("Player")
 	add_weapon(starting_weapon)
+	_pick_random_direction()
+
+	GameManager.register_player(self)
 	
-func _physics_process(_delta: float) -> void:
-	# TODO: add AI logic here
-	pass
+func _physics_process(delta: float) -> void:
+	ai_timer -= delta
+	if ai_timer <= 0:
+		_pick_random_direction()
+
+	if ai_direction != Vector2.ZERO:
+		velocity = ai_direction * SPEED
+	else:
+		velocity = Vector2.ZERO
+
+	move_and_slide()
+
+	if get_slide_collision_count() > 0:
+		_pick_random_direction()
 
 func add_weapon(weapon_data: WeaponData):
 	var new_slot = weapon_slot_scene.instantiate()
@@ -48,3 +65,11 @@ func die():
 	player_died.emit()
 	# For now, just restart the game instantly
 	get_tree().reload_current_scene()
+
+func _pick_random_direction():
+	# Pick a random angle
+	var angle = randf_range(0, TAU)
+	ai_direction = Vector2.from_angle(angle)
+
+	# Reset timer with some randomness
+	ai_timer = randf_range(change_direction_interval * 0.5, change_direction_interval * 1.5)

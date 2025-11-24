@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://co7tvfjomwkg3"]
+[gd_scene load_steps=6 format=3 uid="uid://co7tvfjomwkg3"]
 
 [ext_resource type="PackedScene" uid="uid://dlx8gy2mqhakx" path="res://player.tscn" id="1_rupst"]
 [ext_resource type="PackedScene" uid="uid://curpiiatp2p0m" path="res://desert_level.tscn" id="1_wt17y"]
 [ext_resource type="Resource" uid="uid://d3nmxfdylldcq" path="res://weapons/wand.tres" id="4_4bqqs"]
 [ext_resource type="PackedScene" uid="uid://bia64nqwaymcs" path="res://ui.tscn" id="4_is3ju"]
+[ext_resource type="Script" uid="uid://dh0u7uwd8wr6g" path="res://scripts/god_camera.gd" id="5_o00ia"]
 
 [node name="Playground" type="Node2D"]
 
@@ -13,5 +14,8 @@
 starting_weapon = ExtResource("4_4bqqs")
 
 [node name="UI" parent="." instance=ExtResource("4_is3ju")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("5_o00ia")
 
 [editable path="DesertLevel"]

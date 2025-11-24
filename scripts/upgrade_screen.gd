@@ -8,8 +8,7 @@ extends CanvasLayer
 
 
 func _ready():
-	ExperienceManager.level_up.connect(_on_level_up)
-	
+	# ExperienceManager.level_up.connect(_on_level_up)
 	button1.pressed.connect(_on_choice_made.bind(button1))
 	button2.pressed.connect(_on_choice_made.bind(button2))
 	button3.pressed.connect(_on_choice_made.bind(button3))
@@ -32,7 +31,6 @@ func _on_level_up(_new_level):
 
 
 func _on_choice_made(button_pressed: Button):
-	
 	var upgrade_chosen: UpgradeData = button_pressed.get_meta("upgrade")
 	
 	get_tree().get_first_node_in_group("Player").apply_upgrade(upgrade_chosen)
