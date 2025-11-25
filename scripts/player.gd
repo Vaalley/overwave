@@ -6,12 +6,16 @@ var weapon_slot_scene = preload("res://weapon_slot.tscn")
 signal health_changed(current_value, max_value)
 signal player_died
 
+# Health system
 @export var max_health: float = 100.0
 var health: float = 100.0
+
+# AI movement
 var ai_direction: Vector2 = Vector2.ZERO
 var ai_timer: float = 0.0
 @export var change_direction_interval: float = 2.0
 
+# Movement speed
 var SPEED = 100.0
 
 func _ready() -> void:

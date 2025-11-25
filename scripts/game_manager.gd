@@ -7,8 +7,8 @@ var enemy_scene: PackedScene = preload("res://ghost.tscn")
 # Mana related settings
 @export var max_mana: float = 100.0
 var current_mana: float
-@export var mana_regen_rate: float = 2.0
-@export var ghost_spawn_cost: float = 20.0
+@export var mana_regen_rate: float = 3.0
+@export var ghost_spawn_cost: float = 10.0
 
 # Time/duration settings
 var time_elapsed: float = 0.0
