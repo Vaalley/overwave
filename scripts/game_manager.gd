@@ -10,9 +10,13 @@ var current_mana: float
 @export var mana_regen_rate: float = 2.0
 @export var ghost_spawn_cost: float = 20.0
 
-# Time/duration related settings
+# Time/duration settings
 var time_elapsed: float = 0.0
 @export var game_duration: float = 60.0
+
+# Player settings
+var player_ref: Node2D
+@export var safe_zone_radius: float = 120.0
 
 func _ready() -> void:
 	current_mana = max_mana
@@ -33,6 +37,15 @@ func _process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and current_mana >= ghost_spawn_cost:
+		# Check if player exists
+		if not is_instance_valid(player_ref): return
+
+		# Check Safe Zone
+		var spawn_pos = player_ref.get_global_mouse_position()
+		if spawn_pos.distance_to(player_ref.global_position) < safe_zone_radius:
+			return # Too close!
+
+		# Spawn ghost at mouse position
 		spend_mana(ghost_spawn_cost)
 		var new_enemy = enemy_scene.instantiate()
 		get_tree().current_scene.add_child(new_enemy)
@@ -50,5 +63,6 @@ func spend_mana(amount: float) -> void:
 	mana_changed.emit(current_mana, max_mana)
 
 func register_player(player_node):
+	player_ref = player_node
 	player_node.player_died.connect(_on_player_died)
 	print("Player connected to Game Manager.")

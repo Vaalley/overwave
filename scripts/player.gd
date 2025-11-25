@@ -20,6 +20,7 @@ func _ready() -> void:
 	_pick_random_direction()
 
 	GameManager.register_player(self)
+	queue_redraw()
 	
 func _physics_process(delta: float) -> void:
 	ai_timer -= delta
@@ -35,6 +36,12 @@ func _physics_process(delta: float) -> void:
 
 	if get_slide_collision_count() > 0:
 		_pick_random_direction()
+
+func _draw():
+	# Draw a faint red circle to show the safe zone
+	draw_circle(Vector2.ZERO, GameManager.safe_zone_radius, Color(1.0, 0.3, 0.3, 0.2))
+	# Draw an outline
+	draw_arc(Vector2.ZERO, GameManager.safe_zone_radius, 0, TAU, 32, Color(1.0, 0.3, 0.3, 0.8), 2.0)
 
 func add_weapon(weapon_data: WeaponData):
 	var new_slot = weapon_slot_scene.instantiate()

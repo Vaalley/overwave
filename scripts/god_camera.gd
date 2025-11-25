@@ -1,6 +1,6 @@
 extends Camera2D
 
-var speed = 400
+var speed = 300
 var zoom_speed = 0.1
 var super_speed = speed * 2.0
 
