@@ -14,9 +14,10 @@ var health: float = 100.0
 var ai_direction: Vector2 = Vector2.ZERO
 var ai_timer: float = 0.0
 @export var change_direction_interval: float = 2.0
+@export var fear_radius: float = 100.0
 
 # Movement speed
-var SPEED = 100.0
+var SPEED = 80.0
 
 func _ready() -> void:
 	add_to_group("Player")
@@ -31,7 +32,13 @@ func _physics_process(delta: float) -> void:
 	if ai_timer <= 0:
 		_pick_random_direction()
 
-	if ai_direction != Vector2.ZERO:
+	# Check for danger (enemies nearby)
+	var danger = _get_flee_vector()
+
+	# Decide Movement
+	if danger != Vector2.ZERO:
+		velocity = velocity.lerp(danger * SPEED * 1.2, 0.1)
+	elif ai_direction != Vector2.ZERO:
 		velocity = ai_direction * SPEED
 	else:
 		velocity = Vector2.ZERO
@@ -84,3 +91,21 @@ func _pick_random_direction():
 
 	# Reset timer with some randomness
 	ai_timer = randf_range(change_direction_interval * 0.5, change_direction_interval * 1.5)
+
+func _get_flee_vector() -> Vector2:
+	var enemies = get_tree().get_nodes_in_group("Enemy")
+	var flee_vector = Vector2.ZERO
+	var count = 0
+
+	for enemy in enemies:
+		var dist = global_position.distance_to(enemy.global_position)
+		if dist < fear_radius:
+			# Vector away from enemy
+			var away = (global_position - enemy.global_position).normalized()
+			# Weight by distance (closer enemies matter more)
+			flee_vector += away / dist
+			count += 1
+
+	if count > 0:
+		return flee_vector.normalized()
+	return Vector2.ZERO
