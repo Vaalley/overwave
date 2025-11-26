@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2nm0kb7tayv1"]
+
+[ext_resource type="Script" uid="uid://bn8m7y0a64lf6" path="res://scripts/main_menu.gd" id="1_06t4h"]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_06t4h")
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -43.5
+offset_top = 64.0
+offset_right = 43.5
+offset_bottom = 87.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(43, 11)
+text = "OVERWAVE"
+
+[node name="Play" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -15.5
+offset_right = 20.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+
+[node name="Quit" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = 40.5
+offset_right = 21.0
+offset_bottom = 71.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
