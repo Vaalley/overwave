@@ -12,12 +12,9 @@
 - [x] **Win Condition:** Time Limit (Hero Escapes).
 - [x] **Loss Condition:** Hero Death (Player Victory).
 - [x] **UI:** Basic Mana Bar.
-- [x] **UI:** Timer Display.
-- [x] **UI:** Victory/Defeat Screens.
-
-## The UI Layer
-
-- [ ] Add a Main Menu scene.
+- [x] **UI:** Add the timer display to the HUD.
+- [x] **UI:** Create a "Victory/Defeat" end screen (overlay).
+- [x] **UI:** Add a Main Menu scene.
 
 ## New Unit Types
 
