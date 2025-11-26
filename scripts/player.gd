@@ -81,8 +81,7 @@ func take_damage(amount: float):
 
 func die():
 	player_died.emit()
-	# For now, just restart the game instantly
-	get_tree().reload_current_scene()
+	queue_free()
 
 func _pick_random_direction():
 	# Pick a random angle

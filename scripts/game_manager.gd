@@ -1,8 +1,10 @@
 extends Node
 
-signal mana_changed(current_mana: float, max_mana: float)
-
 var enemy_scene: PackedScene = preload("res://ghost.tscn")
+
+signal mana_changed(current_mana: float, max_mana: float)
+signal time_updated(time_left)
+signal game_ended(player_won) # true if player (God) won (Hero died)
 
 # Mana related settings
 @export var max_mana: float = 100.0
@@ -21,16 +23,14 @@ var player_ref: Node2D
 func _ready() -> void:
 	current_mana = max_mana
 	mana_changed.emit(current_mana, max_mana)
-	
-func _on_player_died() -> void:
-	print("Player died! Victory!")
-	set_process(false)
-	# TODO: show win screen here?
 
 func _process(delta: float) -> void:
 	time_elapsed += delta
+	var time_left = max(0.0, game_duration - time_elapsed)
+	time_updated.emit(time_left)
+
 	if time_elapsed >= game_duration:
-		print("Game over! Time's up.")
+		_end_game(false)
 		set_process(false)
 		
 	regenerate_mana(delta)
@@ -51,6 +51,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().current_scene.add_child(new_enemy)
 		new_enemy.global_position = new_enemy.get_global_mouse_position()
 		print("Spawned ghost! Mana: ", current_mana, " / ", max_mana)
+	
+func _on_player_died() -> void:
+	_end_game(true)
+	set_process(false)
+
+func _end_game(player_won: bool) -> void:
+	print("Game ended! Player won: ", player_won)
+	game_ended.emit(player_won)
 
 func regenerate_mana(delta: float) -> void:
 	current_mana += mana_regen_rate * delta
@@ -66,3 +74,9 @@ func register_player(player_node):
 	player_ref = player_node
 	player_node.player_died.connect(_on_player_died)
 	print("Player connected to Game Manager.")
+
+func reset_game() -> void:
+	time_elapsed = 0.0
+	current_mana = max_mana
+	set_process(true)
+	mana_changed.emit(current_mana, max_mana)
