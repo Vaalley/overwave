@@ -1,7 +1,5 @@
 extends Node
 
-var enemy_scene: PackedScene = preload("res://ghost.tscn")
-
 signal mana_changed(current_mana: float, max_mana: float)
 signal time_updated(time_left)
 signal game_ended(player_won) # true if player (God) won (Hero died)
@@ -10,7 +8,6 @@ signal game_ended(player_won) # true if player (God) won (Hero died)
 @export var max_mana: float = 100.0
 var current_mana: float
 @export var mana_regen_rate: float = 3.0
-@export var ghost_spawn_cost: float = 10.0
 
 # Time/duration settings
 var time_elapsed: float = 0.0
@@ -19,6 +16,18 @@ var time_elapsed: float = 0.0
 # Player settings
 var player_ref: Node2D
 @export var safe_zone_radius: float = 120.0
+
+# Unit settings
+var enemy_scenes: Array[PackedScene] = [
+	preload("res://ghost.tscn"),
+	preload("res://bat.tscn"),
+	preload("res://cyclop.tscn"),
+]
+var enemy_costs: Array[float] = [10.0, 5.0, 25.0]
+var enemy_names: Array[String] = ["Ghost", "Bat", "Cyclop"]
+var selected_unit: int = 0
+
+signal unit_changed(index: int, name: String, cost: float)
 
 func _ready() -> void:
 	current_mana = max_mana
@@ -36,21 +45,37 @@ func _process(delta: float) -> void:
 	regenerate_mana(delta)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and current_mana >= ghost_spawn_cost:
-		# Check if player exists
-		if not is_instance_valid(player_ref): return
+	# Unit Selection (1, 2, 3)
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_1:
+			_select_unit(0)
+		elif event.keycode == KEY_2:
+			_select_unit(1)
+		elif event.keycode == KEY_3:
+			_select_unit(2)
 
-		# Check Safe Zone
+	# Spawning
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		var cost = enemy_costs[selected_unit]
+		if current_mana < cost:
+			return
+		if not is_instance_valid(player_ref):
+			return
+
 		var spawn_pos = player_ref.get_global_mouse_position()
 		if spawn_pos.distance_to(player_ref.global_position) < safe_zone_radius:
-			return # Too close!
+			return
 
-		# Spawn ghost at mouse position
-		spend_mana(ghost_spawn_cost)
-		var new_enemy = enemy_scene.instantiate()
+		spend_mana(cost)
+		var new_enemy = enemy_scenes[selected_unit].instantiate()
 		get_tree().current_scene.add_child(new_enemy)
-		new_enemy.global_position = new_enemy.get_global_mouse_position()
-		print("Spawned ghost! Mana: ", current_mana, " / ", max_mana)
+		new_enemy.global_position = player_ref.get_global_mouse_position()
+
+func _select_unit(index: int) -> void:
+	if index >= 0 and index < enemy_scenes.size():
+		selected_unit = index
+		unit_changed.emit(index, enemy_names[index], enemy_costs[index])
+		print("Selected unit: ", enemy_names[index], " (cost: ", enemy_costs[index], ")")
 	
 func _on_player_died() -> void:
 	_end_game(true)

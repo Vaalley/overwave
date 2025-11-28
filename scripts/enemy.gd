@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var speed: float = 50.0
 @export var max_health: float = 10.0
+@export var damage: float = 10.0
 
 var health: float
 var player = null
@@ -41,5 +42,5 @@ func die():
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		body.take_damage(10.0)
+		body.take_damage(damage)
 		queue_free()

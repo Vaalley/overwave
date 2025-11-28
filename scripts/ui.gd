@@ -7,6 +7,11 @@ extends CanvasLayer
 @onready var game_over_panel = $GameOverPanel
 @onready var result_label = $GameOverPanel/ResultLabel
 @onready var restart_button = $GameOverPanel/RestartButton
+@onready var unit_panels: Array[Control] = [
+	$UnitSelector/UnitPanel0,
+	$UnitSelector/UnitPanel1,
+	$UnitSelector/UnitPanel2
+]
 
 func _ready():
 	GameManager.mana_changed.connect(_on_mana_changed)
@@ -23,6 +28,12 @@ func _ready():
 		player.health_changed.connect(_on_player_health_changed)
 		health_bar.max_value = player.max_health
 		health_bar.value = player.health
+	
+	# Connect to unit changes
+	GameManager.unit_changed.connect(_on_unit_changed)
+	
+	# Initialize with current selection (0)
+	_update_unit_selection(0)
 
 func _on_mana_changed(current_mana, max_mana):
 	mana_bar.value = current_mana
@@ -47,3 +58,14 @@ func _on_game_ended(player_won: bool):
 func _on_restart_pressed():
 	get_tree().reload_current_scene()
 	GameManager.reset_game()
+
+func _on_unit_changed(index: int, _name: String, _cost: float) -> void:
+	_update_unit_selection(index)
+
+func _update_unit_selection(selected_index: int) -> void:
+	for i in range(unit_panels.size()):
+		var panel = unit_panels[i]
+		if i == selected_index:
+			panel.modulate = Color.WHITE
+		else:
+			panel.modulate = Color(0.5, 0.5, 0.5, 0.8)

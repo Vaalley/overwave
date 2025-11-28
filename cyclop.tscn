@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfus4yfn4f3bo"]
+[gd_scene load_steps=5 format=3 uid="uid://clkipoxfbvwlm"]
 
-[ext_resource type="Script" uid="uid://c6m1eiccj5dls" path="res://scripts/enemy.gd" id="1_6attn"]
-[ext_resource type="Texture2D" uid="uid://f2yuxwrr2un4" path="res://tilemap_packed.png" id="1_v5pp4"]
+[ext_resource type="Script" uid="uid://c6m1eiccj5dls" path="res://scripts/enemy.gd" id="1_0k1me"]
+[ext_resource type="Texture2D" uid="uid://f2yuxwrr2un4" path="res://tilemap_packed.png" id="2_wrchw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6attn"]
 radius = 7.0
@@ -9,15 +9,17 @@ radius = 7.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_obmiq"]
 radius = 8.0
 
-[node name="Ghost" type="CharacterBody2D" groups=["Enemy"]]
-script = ExtResource("1_6attn")
-max_health = 2.0
+[node name="Cyclop" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_0k1me")
+speed = 30.0
+max_health = 8.0
+damage = 20.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_v5pp4")
+texture = ExtResource("2_wrchw")
 hframes = 12
 vframes = 12
-frame = 121
+frame = 109
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_6attn")

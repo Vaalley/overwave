@@ -15,12 +15,15 @@
 - [x] **UI:** Add the timer display to the HUD.
 - [x] **UI:** Create a "Victory/Defeat" end screen (overlay).
 - [x] **UI:** Add a Main Menu scene.
+- [x] **Units:** Create "Bat" (low cost, high speed, low health).
+- [x] **Units:** Create "Cyclop" (high cost, slow speed, high health, high
+      damage).
 
 ## New Unit Types
 
-- [ ] Create "Bat" (low cost, high speed, low health).
-- [ ] Create "Cyclop" (high cost, slow speed, high health, high damage).
-- [ ] Implement UI for selecting units (1, 2, 3 keys or clicking icons).
+- [x] Each unit should have its own damage amount
+- [x] Implement UI for selecting units (1, 2, 3 keys implemented, need visual
+      icons).
 - [ ] Add unique behaviors/AI for different units?
 
 ## Hero Progression

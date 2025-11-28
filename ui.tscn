@@ -86,3 +86,52 @@ offset_bottom = 31.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Restart"
+
+[node name="UnitSelector" type="HBoxContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_right = 8.0
+grow_vertical = 0
+
+[node name="UnitPanel0" type="PanelContainer" parent="UnitSelector"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UnitSelector/UnitPanel0"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="UnitSelector/UnitPanel0/VBoxContainer"]
+layout_mode = 2
+text = "Ghost"
+
+[node name="CostLabel" type="Label" parent="UnitSelector/UnitPanel0/VBoxContainer"]
+layout_mode = 2
+text = "10"
+
+[node name="UnitPanel1" type="PanelContainer" parent="UnitSelector"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UnitSelector/UnitPanel1"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="UnitSelector/UnitPanel1/VBoxContainer"]
+layout_mode = 2
+text = "Bat"
+
+[node name="CostLabel" type="Label" parent="UnitSelector/UnitPanel1/VBoxContainer"]
+layout_mode = 2
+text = "5"
+
+[node name="UnitPanel2" type="PanelContainer" parent="UnitSelector"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UnitSelector/UnitPanel2"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="UnitSelector/UnitPanel2/VBoxContainer"]
+layout_mode = 2
+text = "Cyclop"
+
+[node name="CostLabel" type="Label" parent="UnitSelector/UnitPanel2/VBoxContainer"]
+layout_mode = 2
+text = "25"
