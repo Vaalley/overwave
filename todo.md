@@ -36,3 +36,7 @@
 - [ ] Add Sound Effects (Spawn, Shoot, Hit, Die).
 - [ ] Add Background Music.
 - [ ] Add visual spawn effects (poof/particle).
+- [ ] A power up system where the player can activate abilities (that have a
+      cooldown and a mana cost), for example: "clone" an ability that costs 15
+      mana and has a 20 second cooldown but the next unit spawned is actually
+      spawned 3 times instead of just one.

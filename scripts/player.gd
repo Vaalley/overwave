@@ -58,17 +58,6 @@ func add_weapon(weapon_data: WeaponData):
 	var new_slot = weapon_slot_scene.instantiate()
 	$WeaponManager.add_child(new_slot)
 	new_slot.init(weapon_data, self)
-
-func apply_upgrade(upgrade: UpgradeData):
-	match upgrade.type:
-		UpgradeData.UpgradeType.PLAYER_SPEED:
-			SPEED += upgrade.value
-			print("Speed is now: ", SPEED)
-			
-		UpgradeData.UpgradeType.ATTACK_SPEED:
-			for weapon_slot in $WeaponManager.get_children():
-				weapon_slot.timer.wait_time *= upgrade.value
-			print("All weapon fire rates multiplied by: ", upgrade.value)
 			
 func take_damage(amount: float):
 	health -= amount

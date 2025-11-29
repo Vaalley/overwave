@@ -1,14 +1,79 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8canohv7airc"]
+[gd_scene load_steps=5 format=3 uid="uid://c8canohv7airc"]
 
-[ext_resource type="Script" uid="uid://blj17kkldp1n2" path="res://scripts/upgrade_screen.gd" id="1_adbc8"]
-[ext_resource type="Resource" uid="uid://dfdvsn5fh8agb" path="res://upgrades/firerate_1.tres" id="2_ovwte"]
-[ext_resource type="Resource" uid="uid://cegmvasfijsbl" path="res://upgrades/speed_1.tres" id="3_sbak5"]
+[sub_resource type="GDScript" id="GDScript_h8ojn"]
+script/source = "extends CanvasLayer
+
+@export var all_upgrades: Array
+
+@onready var button1 = $VBoxContainer/Button
+@onready var button2 = $VBoxContainer/Button2
+@onready var button3 = $VBoxContainer/Button3
+
+
+func _ready():
+	# ExperienceManager.level_up.connect(_on_level_up)
+	button1.pressed.connect(_on_choice_made.bind(button1))
+	button2.pressed.connect(_on_choice_made.bind(button2))
+	button3.pressed.connect(_on_choice_made.bind(button3))
+
+
+func _on_level_up(_new_level):
+	get_tree().paused = true
+	self.visible = true
+
+	all_upgrades.shuffle()
+	var choices = all_upgrades.slice(0, 2)
+	
+	button1.text = choices[0].name
+	button2.text = choices[1].name
+	#button3.text = choices[2].name
+	
+	button1.set_meta(\"upgrade\", choices[0])
+	button2.set_meta(\"upgrade\", choices[1])
+	#button3.set_meta(\"upgrade\", choices[2])
+
+
+func _on_choice_made(button_pressed: Button):
+	var upgrade_chosen: UpgradeData = button_pressed.get_meta(\"upgrade\")
+	
+	get_tree().get_first_node_in_group(\"Player\").apply_upgrade(upgrade_chosen)
+	
+	get_tree().paused = false
+	self.visible = false
+"
+
+[sub_resource type="GDScript" id="GDScript_adbc8"]
+script/source = "extends Resource
+class_name UpgradeData
+
+enum UpgradeType { PLAYER_SPEED, ATTACK_SPEED }
+
+@export var name: String
+@export_multiline var description: String
+@export var type: UpgradeType
+@export var value: float
+"
+
+[sub_resource type="Resource" id="Resource_scxlh"]
+script = SubResource("GDScript_adbc8")
+name = "Rapid Fire"
+description = "Fire 10% faster."
+type = 1
+value = 0.9
+metadata/_custom_type_script = "uid://co5ptavqlsk7p"
+
+[sub_resource type="Resource" id="Resource_ovwte"]
+script = SubResource("GDScript_adbc8")
+name = "Speed Boost"
+description = "Move 15% faster."
+value = 15.0
+metadata/_custom_type_script = "uid://co5ptavqlsk7p"
 
 [node name="UpgradeScreen" type="CanvasLayer"]
 process_mode = 3
 visible = false
-script = ExtResource("1_adbc8")
-all_upgrades = [ExtResource("2_ovwte"), ExtResource("3_sbak5")]
+script = SubResource("GDScript_h8ojn")
+all_upgrades = [SubResource("Resource_scxlh"), SubResource("Resource_ovwte")]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
