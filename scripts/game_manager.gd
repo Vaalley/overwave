@@ -7,7 +7,7 @@ signal game_ended(player_won) # true if player (God) won (Hero died)
 # Mana related settings
 @export var max_mana: float = 100.0
 var current_mana: float
-@export var mana_regen_rate: float = 3.0
+@export var mana_regen_rate: float = 3.5
 
 # Time/duration settings
 var time_elapsed: float = 0.0

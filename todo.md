@@ -26,9 +26,9 @@
 
 ## Hero Progression
 
-- [ ] Make the Hero collect XP gems (currently ignored).
-- [ ] Implement "Level Up" logic (Hero gets faster/stronger over time).
-- [ ] Visual feedback for Hero leveling up.
+- [x] Make the Hero collect XP gems.
+- [x] Implement "Level Up" logic (Hero gets faster/stronger over time).
+- [x] Visual feedback for Hero leveling up.
 
 ## Juice & Polish
 
@@ -36,6 +36,9 @@
 - [ ] Add Sound Effects (Spawn, Shoot, Hit, Die).
 - [ ] Add Background Music.
 - [ ] Add visual spawn effects (poof/particle).
+
+## To be considered in the future
+
 - [ ] A power up system where the player can activate abilities (that have a
       cooldown and a mana cost), for example: "clone" an ability that costs 15
       mana and has a 20 second cooldown but the next unit spawned is actually

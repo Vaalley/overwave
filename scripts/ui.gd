@@ -2,8 +2,10 @@ extends CanvasLayer
 
 @onready var mana_bar = $ManaBar
 @onready var health_bar = $HealthBar
+@onready var xp_bar = $XPBar
 @onready var timer_label = $TimerLabel
 
+# Unit selection UI
 @onready var game_over_panel = $GameOverPanel
 @onready var result_label = $GameOverPanel/ResultLabel
 @onready var restart_button = $GameOverPanel/RestartButton
@@ -28,6 +30,9 @@ func _ready():
 		player.health_changed.connect(_on_player_health_changed)
 		health_bar.max_value = player.max_health
 		health_bar.value = player.health
+		player.xp_changed.connect(_on_player_xp_changed)
+		xp_bar.max_value = player.max_xp
+		xp_bar.value = player.current_xp
 	
 	# Connect to unit changes
 	GameManager.unit_changed.connect(_on_unit_changed)
@@ -69,3 +74,7 @@ func _update_unit_selection(selected_index: int) -> void:
 			panel.modulate = Color.WHITE
 		else:
 			panel.modulate = Color(0.5, 0.5, 0.5, 0.8)
+
+func _on_player_xp_changed(current, max_val):
+	xp_bar.value = current
+	xp_bar.max_value = max_val

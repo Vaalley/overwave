@@ -1,7 +1,7 @@
 extends "res://scripts/enemy.gd"
 
 var is_enraged: bool = false
-var enraged_speed_multiplier: float = 1.5
+var enraged_speed_multiplier: float = 2.0
 
 func take_damage(amount: float) -> void:
 	super.take_damage(amount)
