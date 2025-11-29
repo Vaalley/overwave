@@ -13,15 +13,19 @@ func _ready():
 	
 	add_to_group("Enemy")
 
-func _physics_process(_delta: float):
+func _physics_process(delta: float):
 	if not player:
 		player = get_tree().get_first_node_in_group("Player")
 		if not player:
 			return
 	
-	var direction = global_position.direction_to(player.global_position)
-	velocity = direction * speed
+	velocity = _get_movement_velocity(delta)
 	move_and_slide()
+
+func _get_movement_velocity(_delta: float) -> Vector2:
+	# Default behavior: Move straight to player
+	var direction = global_position.direction_to(player.global_position)
+	return direction * speed
 
 func take_damage(amount):
 	health -= amount

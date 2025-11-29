@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b7ge85ysvq8jn"]
 
-[ext_resource type="Script" uid="uid://c6m1eiccj5dls" path="res://scripts/enemy.gd" id="1_tofr1"]
+[ext_resource type="Script" uid="uid://c4f4fpsvxitw3" path="res://scripts/bat.gd" id="1_tofr1"]
 [ext_resource type="Texture2D" uid="uid://f2yuxwrr2un4" path="res://tilemap_packed.png" id="2_vobq3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6attn"]

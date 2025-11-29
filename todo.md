@@ -18,13 +18,11 @@
 - [x] **Units:** Create "Bat" (low cost, high speed, low health).
 - [x] **Units:** Create "Cyclop" (high cost, slow speed, high health, high
       damage).
-
-## New Unit Types
-
-- [x] Each unit should have its own damage amount
+- [x] **Units:** Each unit should have its own damage amount
 - [x] Implement UI for selecting units (1, 2, 3 keys implemented, need visual
       icons).
-- [ ] Add unique behaviors/AI for different units?
+- [x] **Units:** Add unique behaviors/AI for different units? (Bat swoops,
+      Cyclop enrages)
 
 ## Hero Progression
 
