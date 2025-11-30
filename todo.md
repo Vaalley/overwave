@@ -35,7 +35,7 @@
 - [ ] Add Screen Shake on impact/shooting.
 - [x] Add Sound Effects (Spawn, Shoot, Hit, Die).
 - [x] Add Background Music.
-- [ ] Add visual spawn effects (poof/particle).
+- [x] Add visual spawn effects (poof/particle).
 
 ## To be considered in the future
 

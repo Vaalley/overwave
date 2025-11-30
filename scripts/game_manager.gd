@@ -26,6 +26,7 @@ var enemy_scenes: Array[PackedScene] = [
 var enemy_costs: Array[float] = [10.0, 5.0, 25.0]
 var enemy_names: Array[String] = ["Ghost", "Bat", "Cyclop"]
 var selected_unit: int = 0
+var spawn_effect_scene = preload("res://spawn_effect.tscn")
 
 signal unit_changed(index: int, name: String, cost: float)
 
@@ -68,9 +69,16 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 
 		spend_mana(cost)
+		# Spawn effect
+		var spawn_effect = spawn_effect_scene.instantiate()
+		spawn_effect.global_position = player_ref.get_global_mouse_position()
+		get_tree().current_scene.add_child(spawn_effect)
+		
+		# Spawn enemy
 		var new_enemy = enemy_scenes[selected_unit].instantiate()
 		get_tree().current_scene.add_child(new_enemy)
 		new_enemy.global_position = player_ref.get_global_mouse_position()
+		
 		SoundManager.play_sfx("enemy_spawn")
 
 func _select_unit(index: int) -> void:
