@@ -73,6 +73,7 @@ func add_weapon(weapon_data: WeaponData):
 func take_damage(amount: float):
 	health -= amount
 	print("Ouch! Health is: ", health)
+	SoundManager.play_sfx("hero_hit")
 	
 	health_changed.emit(health, max_health)
 	
@@ -81,6 +82,7 @@ func take_damage(amount: float):
 
 func add_xp(amount: int):
 	current_xp += amount
+	SoundManager.play_sfx("xp_pickup")
 	xp_changed.emit(current_xp, max_xp)
 
 	if current_xp >= max_xp:
@@ -88,6 +90,7 @@ func add_xp(amount: int):
 
 func level_up():
 	# Actual level up
+	SoundManager.play_sfx("level_up")
 	current_xp -= max_xp
 	level += 1
 	max_xp = floor(max_xp * 1.5)

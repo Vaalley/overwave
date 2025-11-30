@@ -29,6 +29,7 @@ func _get_movement_velocity(_delta: float) -> Vector2:
 
 func take_damage(amount):
 	health -= amount
+	SoundManager.play_sfx("enemy_hit")
 	var tween = create_tween()
 	tween.tween_property($Sprite2D, "scale", Vector2(1.2, 1.2), 0.1)
 	tween.tween_property($Sprite2D, "scale", Vector2(1.0, 1.0), 0.1)
@@ -37,6 +38,7 @@ func take_damage(amount):
 		call_deferred("die")
 
 func die():
+	SoundManager.play_sfx("enemy_die")
 	var gem_instance = xp_gem_scene.instantiate()
 	gem_instance.global_position = global_position
 	get_tree().root.add_child(gem_instance)

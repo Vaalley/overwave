@@ -32,6 +32,7 @@ signal unit_changed(index: int, name: String, cost: float)
 func _ready() -> void:
 	current_mana = max_mana
 	mana_changed.emit(current_mana, max_mana)
+	SoundManager.play_music("bgm")
 
 func _process(delta: float) -> void:
 	time_elapsed += delta
@@ -70,6 +71,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		var new_enemy = enemy_scenes[selected_unit].instantiate()
 		get_tree().current_scene.add_child(new_enemy)
 		new_enemy.global_position = player_ref.get_global_mouse_position()
+		SoundManager.play_sfx("enemy_spawn")
 
 func _select_unit(index: int) -> void:
 	if index >= 0 and index < enemy_scenes.size():
@@ -84,6 +86,11 @@ func _on_player_died() -> void:
 func _end_game(player_won: bool) -> void:
 	print("Game ended! Player won: ", player_won)
 	game_ended.emit(player_won)
+	SoundManager.stop_music()
+	if player_won:
+		SoundManager.play_music("victory")
+	else:
+		SoundManager.play_sfx("game_over")
 
 func regenerate_mana(delta: float) -> void:
 	current_mana += mana_regen_rate * delta
@@ -105,3 +112,4 @@ func reset_game() -> void:
 	current_mana = max_mana
 	set_process(true)
 	mana_changed.emit(current_mana, max_mana)
+	SoundManager.play_music("bgm")

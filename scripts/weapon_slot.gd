@@ -43,3 +43,4 @@ func _fire_at(target: Node2D):
 	projectile.rotation = direction.angle()
 	
 	get_tree().current_scene.add_child(projectile)
+	SoundManager.play_sfx("hero_shoot")

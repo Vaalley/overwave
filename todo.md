@@ -33,8 +33,8 @@
 ## Juice & Polish
 
 - [ ] Add Screen Shake on impact/shooting.
-- [ ] Add Sound Effects (Spawn, Shoot, Hit, Die).
-- [ ] Add Background Music.
+- [x] Add Sound Effects (Spawn, Shoot, Hit, Die).
+- [x] Add Background Music.
 - [ ] Add visual spawn effects (poof/particle).
 
 ## To be considered in the future
