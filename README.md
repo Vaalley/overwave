@@ -24,3 +24,13 @@ The Hero is trying to survive for **60 seconds**. Your goal is to stop them.
 ## Credits
 
 Created by Vaalley. Made with Godot 4.5
+
+## Roadmap / Future Ideas
+
+- [ ] **Map Events:**
+  - **The Oasis:** A healing pool spawns randomly. The Hero tries to drink from
+    it to heal, forcing the player to defend it.
+  - **Sandstorm:** A global weather event that slows down all units (Hero and
+    Enemies).
+- [ ] **New Units:** Ranged attackers or "suicide bomber" types.
+- [ ] **Hero AI 2.0:** Hero builds defenses or seeks specific objectives.
