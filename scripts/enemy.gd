@@ -6,7 +6,7 @@ class_name Enemy extends CharacterBody2D
 
 var health: float
 var player: Node2D = null
-var xp_gem_scene = preload("res://xp_gem.tscn")
+var xp_gem_scene = preload("res://scenes/entities/xp_gem.tscn")
 
 func _ready() -> void:
 	health = max_health

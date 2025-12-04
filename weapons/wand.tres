@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://d3nmxfdylldcq"]
 
-[ext_resource type="PackedScene" uid="uid://c1npembrkse86" path="res://projectile.tscn" id="1_0agj6"]
+[ext_resource type="PackedScene" uid="uid://c1npembrkse86" path="res://scenes/entities/projectile.tscn" id="1_0agj6"]
 [ext_resource type="Script" uid="uid://wb1j7m6sm2s6" path="res://scripts/weapon_data.gd" id="1_worie"]
 
 [resource]

@@ -8,7 +8,7 @@ func _ready():
 	quit_button.pressed.connect(_on_quit_pressed)
 
 func _on_play_pressed():
-	get_tree().change_scene_to_file("res://main.tscn")
+	get_tree().change_scene_to_file("res://scenes/main.tscn")
 	GameManager.reset_game()
 
 func _on_quit_pressed():

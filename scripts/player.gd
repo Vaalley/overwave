@@ -10,7 +10,7 @@ signal xp_changed(current_xp: int, max_xp: int)
 #region Configuration
 @export_group("Weapon")
 @export var starting_weapon: WeaponData
-var weapon_slot_scene = preload("res://weapon_slot.tscn")
+var weapon_slot_scene = preload("res://scenes/components/weapon_slot.tscn")
 
 @export_group("Health")
 @export var max_health: float = 100.0

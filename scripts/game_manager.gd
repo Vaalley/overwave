@@ -20,14 +20,14 @@ var time_elapsed: float = 0.0
 
 @export_group("Units")
 var enemy_scenes: Array[PackedScene] = [
-	preload("res://ghost.tscn"),
-	preload("res://bat.tscn"),
-	preload("res://cyclop.tscn"),
+	preload("res://scenes/entities/ghost.tscn"),
+	preload("res://scenes/entities/bat.tscn"),
+	preload("res://scenes/entities/cyclops.tscn"),
 ]
 var enemy_costs: Array[float] = [10.0, 5.0, 25.0]
 var enemy_names: Array[String] = ["Ghost", "Bat", "Cyclop"]
 var selected_unit: int = 0
-var spawn_effect_scene = preload("res://spawn_effect.tscn")
+var spawn_effect_scene = preload("res://scenes/components/spawn_effect.tscn")
 #endregion
 
 #region State
