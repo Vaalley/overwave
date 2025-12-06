@@ -1,21 +1,21 @@
 [gd_scene load_steps=6 format=3 uid="uid://57qasgyyrgld"]
 
-[ext_resource type="PackedScene" uid="uid://dlx8gy2mqhakx" path="res://scenes/entities/player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://curpiiatp2p0m" path="res://scenes/desert_level.tscn" id="1_lquwl"]
-[ext_resource type="Resource" uid="uid://d3nmxfdylldcq" path="res://weapons/wand.tres" id="3_7mycd"]
+[ext_resource type="Resource" uid="uid://d3nmxfdylldcq" path="res://weapons/wand.tres" id="2_wand"]
 [ext_resource type="PackedScene" uid="uid://bia64nqwaymcs" path="res://scenes/ui/ui.tscn" id="4_272bh"]
+[ext_resource type="PackedScene" uid="uid://dlx8gy2mqhakx" path="res://scenes/entities/hero.tscn" id="4_jyhfs"]
 [ext_resource type="Script" uid="uid://dh0u7uwd8wr6g" path="res://scripts/god_camera.gd" id="5_5vw27"]
 
 [node name="Main" type="Node2D"]
 
 [node name="DesertLevel" parent="." instance=ExtResource("1_lquwl")]
 
-[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
-starting_weapon = ExtResource("3_7mycd")
-
 [node name="UI" parent="." instance=ExtResource("4_272bh")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("5_5vw27")
+
+[node name="Hero" parent="." instance=ExtResource("4_jyhfs")]
+starting_weapon = ExtResource("2_wand")
 
 [editable path="DesertLevel"]

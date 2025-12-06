@@ -31,7 +31,7 @@ var spawn_effect_scene = preload("res://scenes/components/spawn_effect.tscn")
 #endregion
 
 #region State
-var player_ref: Node2D
+var hero_ref: Node2D
 #endregion
 
 func _ready() -> void:
@@ -70,13 +70,13 @@ func _select_unit(index: int) -> void:
 		print("Selected unit: ", enemy_names[index], " (cost: ", enemy_costs[index], ")")
 
 func _try_spawn_at_mouse() -> void:
-	if not is_instance_valid(player_ref): return
+	if not is_instance_valid(hero_ref): return
 
 	var cost = enemy_costs[selected_unit]
 	if current_mana < cost: return
 
-	var spawn_pos = player_ref.get_global_mouse_position()
-	if spawn_pos.distance_to(player_ref.global_position) < safe_zone_radius:
+	var spawn_pos = hero_ref.get_global_mouse_position()
+	if spawn_pos.distance_to(hero_ref.global_position) < safe_zone_radius:
 		return
 
 	spend_mana(cost)
@@ -107,13 +107,13 @@ func spend_mana(amount: float) -> void:
 	current_mana = clamp(current_mana, 0, max_mana)
 	mana_changed.emit(current_mana, max_mana)
 
-func register_player(player_node: Node2D) -> void:
-	player_ref = player_node
-	if player_node.has_signal("player_died"):
-		player_node.player_died.connect(_on_player_died)
-	print("Player connected to Game Manager.")
+func register_hero(hero_node: Node2D) -> void:
+	hero_ref = hero_node
+	if hero_node.has_signal("hero_died"):
+		hero_node.hero_died.connect(_on_hero_died)
+	print("Hero connected to Game Manager.")
 
-func _on_player_died() -> void:
+func _on_hero_died() -> void:
 	_end_game(true)
 	set_process(false)
 

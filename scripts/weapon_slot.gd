@@ -2,11 +2,11 @@ extends Node
 
 @onready var timer = $Timer
 var weapon_data: WeaponData
-var player = null
+var hero: Node2D = null
 
-func init(data: WeaponData, player_node: Node2D):
+func init(data: WeaponData, hero_node: Node2D):
 	weapon_data = data
-	player = player_node
+	hero = hero_node
 
 	timer.wait_time = weapon_data.cooldown
 	timer.timeout.connect(_on_timer_timeout)
@@ -27,7 +27,7 @@ func _get_closest_enemy() -> Node2D:
 	var closest_distance = INF
 
 	for enemy in enemies:
-		var dist = player.global_position.distance_squared_to(enemy.global_position)
+		var dist = hero.global_position.distance_squared_to(enemy.global_position)
 		if dist < closest_distance:
 			closest_distance = dist
 			closest_enemy = enemy
@@ -36,9 +36,9 @@ func _get_closest_enemy() -> Node2D:
 
 func _fire_at(target: Node2D):
 	var projectile = weapon_data.projectile_scene.instantiate()
-	projectile.global_position = player.global_position
+	projectile.global_position = hero.global_position
 	
-	var direction = (target.global_position - player.global_position).normalized()
+	var direction = (target.global_position - hero.global_position).normalized()
 	projectile.velocity = direction
 	projectile.rotation = direction.angle()
 	

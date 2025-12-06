@@ -24,15 +24,15 @@ func _ready():
 
 	game_over_panel.visible = false
 	
-	# Wait for player to be ready
-	var player = get_tree().get_first_node_in_group("Player")
-	if player:
-		player.health_changed.connect(_on_player_health_changed)
-		health_bar.max_value = player.max_health
-		health_bar.value = player.health
-		player.xp_changed.connect(_on_player_xp_changed)
-		xp_bar.max_value = player.max_xp
-		xp_bar.value = player.current_xp
+	# Wait for hero to be ready
+	var hero = get_tree().get_first_node_in_group("Hero")
+	if hero:
+		hero.health_changed.connect(_on_hero_health_changed)
+		health_bar.max_value = hero.max_health
+		health_bar.value = hero.health
+		hero.xp_changed.connect(_on_hero_xp_changed)
+		xp_bar.max_value = hero.max_xp
+		xp_bar.value = hero.current_xp
 	
 	# Connect to unit changes
 	GameManager.unit_changed.connect(_on_unit_changed)
@@ -44,16 +44,16 @@ func _on_mana_changed(current_mana, max_mana):
 	mana_bar.value = current_mana
 	mana_bar.max_value = max_mana
 
-func _on_player_health_changed(current, max_val):
+func _on_hero_health_changed(current, max_val):
 	health_bar.value = current
 	health_bar.max_value = max_val
 
 func _on_time_updated(time_left: float):
 	timer_label.text = str(ceil(time_left))
 
-func _on_game_ended(player_won: bool):
+func _on_game_ended(hero_defeated: bool):
 	game_over_panel.visible = true
-	if player_won:
+	if hero_defeated:
 		result_label.text = "VICTORY\n(Hero Defeated)"
 		result_label.modulate = Color.GREEN
 	else:
@@ -75,6 +75,6 @@ func _update_unit_selection(selected_index: int) -> void:
 		else:
 			panel.modulate = Color(0.5, 0.5, 0.5, 0.8)
 
-func _on_player_xp_changed(current, max_val):
+func _on_hero_xp_changed(current, max_val):
 	xp_bar.value = current
 	xp_bar.max_value = max_val

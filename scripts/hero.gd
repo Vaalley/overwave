@@ -1,8 +1,8 @@
-class_name Player extends CharacterBody2D
+class_name Hero extends CharacterBody2D
 
 #region Signals
 signal health_changed(current_value: float, max_value: float)
-signal player_died
+signal hero_died
 signal level_changed(new_level: int)
 signal xp_changed(current_xp: int, max_xp: int)
 #endregion
@@ -34,7 +34,7 @@ var level: int = 1
 #endregion
 
 func _ready() -> void:
-	add_to_group("Player")
+	add_to_group("Hero")
 	health = max_health
 	
 	if starting_weapon:
@@ -42,7 +42,7 @@ func _ready() -> void:
 		
 	_pick_random_direction()
 
-	GameManager.register_player(self)
+	GameManager.register_hero(self)
 	queue_redraw()
 	
 func _physics_process(delta: float) -> void:
@@ -104,7 +104,7 @@ func heal(amount: float) -> void:
 	# SoundManager.play_sfx("heal") # Optional
 
 func die() -> void:
-	player_died.emit()
+	hero_died.emit()
 	queue_free()
 #endregion
 
